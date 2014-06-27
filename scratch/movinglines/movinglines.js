@@ -1,7 +1,21 @@
+;
+
 
 function main() {
   console.log("main");
 
+  var s = Snap("#svg");
+  Snap.load("lines.svg", function (f) {
+    // Note that we traversre and change attr before SVG
+    // is even added to the page
+    s.append(f);
+
+    //f.animate({scale: 6.0});
+
+    s.selectAll("path").animate({stroke: "#f00"}, 1000);
+  })
+
+  /*
   d3.xml("lines.svg", function(error, documentFragment) {
     if (error) {console.log(error); return;}
 
@@ -26,7 +40,7 @@ function main() {
           .attr("r", 100);
 */
     
-  });
+//  });
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
