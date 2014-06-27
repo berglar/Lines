@@ -1,7 +1,7 @@
 
-T=500;
+T=300;
 TT=mina.linear;
-MD=2;
+MD=1.25;
 
 function main() {
   var s = Snap("#svg");
@@ -20,7 +20,9 @@ function main() {
         var wiggle = function() {
           var m = randomMatrix();
           line.animate({transform: m}, T, TT, function() {
-            line.animate({transform: m.invert()}, T, TT, wiggle);
+            line.animate({transform: m.invert()}, T, TT, function() {
+              setTimeout(wiggle, Math.random()*100);
+            });
           });
         };
         wiggle();
