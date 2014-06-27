@@ -10,6 +10,8 @@ function main() {
 
     d3.select("#lines").node().appendChild(svgNode);
 
+    d3.select("#lines").transition().ease("linear").attr("transform", "scale(6.0)");
+
     /*
     //use plain Javascript to extract the node
 
@@ -27,8 +29,10 @@ function main() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", function(event) { 
-  main();
+document.addEventListener("DOMContentLoaded", function(event) {
+  setTimeout(function() {
+    main();
+  }, 1000);
 });
 
 
