@@ -14,7 +14,7 @@ function main() {
       s.selectAll("path").forEach(function(line) {
         var randomMatrix = function() {
           var m = new Snap.Matrix();
-          m.translate(0, (Math.random()*MD)-(MD/2));
+          m.translate(Math.random()*0.25, (Math.random()*MD)-(MD/2));
           return m;
         }
         var wiggle = function() {
