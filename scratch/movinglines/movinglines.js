@@ -1,23 +1,22 @@
 
 function main() {
-  console.log("main");
+  //console.log("main");
 
   var s = Snap("#svg");
   Snap.load("lines.svg", function (f) {
-    // Note that we traversre and change attr before SVG
-    // is even added to the page
     s.append(f);
-
-    //f.animate({scale: 6.0});
-
-    s.animate({scale: 6.0}, 1000);
-
     var m = new Snap.Matrix();
-    m.scale(4,2);		// play with scaling before and after the rotate 
-    m.translate(100,0);   	// this translate will not be applied to the rotation
-    m.rotate(45); 		// rotate
+    m.scale(6,6);
+    s.animate({transform: m}, 1000);
 
-    s.animate({transform: m}, 3000);
+    // individual lines.
+    s.selectAll("path").forEach(function(line) {
+      //console.log(line);
+      var m = new Snap.Matrix();
+      var dist = 10;
+      m.translate(0, (Math.random()*dist)-(dist/2));
+      line.animate({transform: m}, 3000);
+    })
   });
 }
 
@@ -26,4 +25,3 @@ document.addEventListener("DOMContentLoaded", function(event) {
     main();
   }, 1000);
 });
-
