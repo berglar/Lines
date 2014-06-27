@@ -1,4 +1,8 @@
 
+T=500;
+TT=mina.linear;
+MD=2;
+
 function main() {
   var s = Snap("#svg");
   Snap.load("lines.svg", function (f) {
@@ -8,12 +12,16 @@ function main() {
     s.animate({transform: m}, 1000, mina.easein, function() {
       // individual lines.
       s.selectAll("path").forEach(function(line) {
-        var m = new Snap.Matrix();
-        var dist = 0.5;
-        m.translate(0, (Math.random()*dist)-(dist/2));
+        var randomMatrix = function() {
+          var m = new Snap.Matrix();
+          m.translate(0, (Math.random()*MD)-(MD/2));
+          return m;
+        }
         var wiggle = function() {
-          m = m.invert();
-          line.animate({transform: m}, 100, mina.bounce, wiggle);
+          var m = randomMatrix();
+          line.animate({transform: m}, T, TT, function() {
+            line.animate({transform: m.invert()}, T, TT, wiggle);
+          });
         };
         wiggle();
       })
@@ -26,4 +34,3 @@ document.addEventListener("DOMContentLoaded", function(event) {
     main();
   }, 1000);
 });
-
