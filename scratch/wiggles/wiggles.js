@@ -3,6 +3,11 @@ T=300;
 TT=mina.linear;
 MD=1.25;
 
+/* Notes:
+ *   animate path mutation:
+ *     http://stackoverflow.com/questions/22987836/how-to-animate-path-morphs-using-snap-svg
+ */
+
 function main() {
   var s = Snap("#svg");
   Snap.load("lines.svg", function (f) {
@@ -23,6 +28,7 @@ function main() {
           line.animate({transform: m}, T, TT, function() {
             line.animate({transform: m.invert()}, T, TT, function() {
               setTimeout(wiggle, Math.random()*100);
+              return true;
             });
           });
         };
